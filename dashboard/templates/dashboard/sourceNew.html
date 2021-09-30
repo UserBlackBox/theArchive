@@ -1,0 +1,56 @@
+<html>
+{% load static %}
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/main.css' %}">
+    <style>
+        textarea {
+            resize: none;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Dashboard</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/sources">Sources</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/cards">Cards</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="main">
+    <form id="source" method="post" action="/sources/post/">
+        {% csrf_token %}
+        <label for="sourceID" class="form-label">Source ID</label>
+        <input name="sourceID" type="text" id="sourceID" class="form-control">
+
+        <label for="sourceURL" class="form-label">Source URL</label>
+        <input name="sourceURL" type="text" id="sourceURL" class="form-control">
+
+        <label for="sourceFrequency" class="form-label">Frequency (seconds)</label>
+        <input name="sourceFrequency" type="number" id="sourceFrequency" class="form-control">
+
+        <label for="sourceHeader" class="form-label">Request Header</label>
+        <textarea name="sourceHeader" form="source" class="form-control" id="sourceHeader" spellcheck="false" rows="10"></textarea>
+
+        <label for="sourceData" class="form-label">Datapoints</label>
+        <textarea name="sourceData" form="source" class="form-control" id="sourceData" spellcheck="false" rows="10"></textarea>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+</body>
+</html>

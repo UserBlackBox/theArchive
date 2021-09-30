@@ -1,0 +1,61 @@
+<html>
+{% load static %}
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/main.css' %}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Dashboard</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/sources">Sources</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/cards">Cards</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="main">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Card Name</th>
+            <th scope="col" style="text-align: right"><a href="/cards/new" style="text-decoration: none"><i class="bi bi-plus-square"></i> New</a></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for card in cards %}
+            <tr>
+                <td>
+                    {{ card.name }}
+                </td>
+                <td align="right">
+                    <a href="/cards/edit/{{ card.id }}" title="edit"><i class="bi bi-pencil-square"></i></a> <a href="/cards/delete/{{ card.id }}" title="delete"><i class="bi bi-trash"></i></a>
+                    {% if card.id != 0 %}
+                        <a href="/cards/up/{{ card.id }}" title="up"><i class="bi bi-arrow-up"></i></a>
+                    {% else %}
+                        <i class="bi bi-arrow-up"></i>
+                    {% endif %}
+                    {% if card.id != last %}
+                        <a href="/cards/down/{{ card.id }}" title="down"><i class="bi bi-arrow-down"></i></a>
+                    {% else %}
+                        <i class="bi bi-arrow-down"></i>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+</body>
+</html>
